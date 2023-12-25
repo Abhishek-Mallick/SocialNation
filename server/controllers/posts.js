@@ -63,7 +63,8 @@ export const likePost = async (req, res) => {
             post.likes.delete(userId);
         else
             post.likes.set(userId, true);
-
+        
+        // updating the frontend once the post likes are updated
         const updatedPost = await Post.findByIdAndUpdate(
             id,
             { likes: post.likes },
