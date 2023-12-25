@@ -10,7 +10,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
+import { createPost } from "./controllers/posts.js";
 import { register } from "./controllers/auth.js";
+import { verifyToken } from "./middleware/auth.js";
 
 /* configurations */
 // for communication in directories
@@ -44,10 +47,12 @@ const upload = multer({storage: storage});
 /* routes with files */
 // we hit the route /auth/register and we use a middleware where we upload a file to local and register
 app.post("/auth/register", upload.single("picture"),register);
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 /* other routes */
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 
 /* mongoose setup */
 const PORT = process.env.PORT || 6001;
