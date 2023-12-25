@@ -13,6 +13,7 @@ export const getUser = async (req, res) => {
     }
 };
 
+// getting friend details from user id
 export const getUserFriends = async (req, res) => {
     try {
         const { id } = req.params;
@@ -36,7 +37,7 @@ export const getUserFriends = async (req, res) => {
 /* UPDATE */
 export const addRemoveFriend = async (req, res) => {
     try {
-        
+
     }
     catch (err) {
         res.status(404).json({ message: err.message });
