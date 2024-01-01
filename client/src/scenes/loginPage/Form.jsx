@@ -52,9 +52,10 @@ const Form = () => {
     // form from formik
 
     const register = async (values, onSubmitProps) => {
+        // console.log("Inside register function")
         // normally all the value of form are passed in values but as we are using image for which we use form data
         // helps to send form info in terms of object
-        const formData = new formData();
+        const formData = new FormData();
         for(let value in values)
             formData.append(value,values[value]);
         formData.append('picturePath',values.picture.name);
