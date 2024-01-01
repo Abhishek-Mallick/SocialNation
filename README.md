@@ -1,6 +1,7 @@
 ### SocialNation
 
-Frontedn hosted at -> https://social-nation.vercel.app/
+Frontend hosted at -> https://social-nation.vercel.app/
+<br>
 Backend hosted at -> https://socialnation-server.onrender.com/
 
 
