@@ -50,7 +50,10 @@ const Form = () => {
     const isRegister = pageType === "register";
 
     // form from formik
-    const handleFormSubmit = async( values, onSubmitProps ) => {};
+    const handleFormSubmit = async( values, onSubmitProps ) => {
+        if(isLogin) await login(values,onSubmitProps);
+        if(isRegister) await register(values,onSubmitProps);
+    };
 
     return (
         <Formik
@@ -181,6 +184,38 @@ const Form = () => {
                                     sx={{ gridColumn: "span 4" }}
                                 />
                                 
+                                {/* Buttons */}
+                                <Box>
+                                    <Button
+                                        fullWidth
+                                        type="submit"
+                                        sx={{ m:"2rem 0",
+                                          p:"1rem",
+                                          backgroundColor: palette.primary.main,
+                                          color: palette.background.alt,
+                                          "&:hover": { color: palette.primary.main }              
+                                        }}
+                                    >
+                                        { isLogin ? "Login" : "Register" }
+                                    </Button>
+                                    <Typography
+                                        onClick={() => {
+                                            setPageType(isLogin ? "register" : "login");
+                                            resetForm();
+                                        }}
+                                        sx={{
+                                            textDecoration: "underline",
+                                            color: palette.primary.main,
+                                            "&:hover": {
+                                                cursor: "pointer",
+                                                color: palette.primary.light
+                                            },
+                                        }}
+                                    >
+                                    { isLogin ? "Dont have a account? Sign up here!" : "Aldready have a account? Login here!" }
+
+                                    </Typography>
+                                </Box>
                     </Box>
                 </form>
             )}
