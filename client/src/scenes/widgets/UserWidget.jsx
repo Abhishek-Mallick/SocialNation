@@ -24,7 +24,34 @@ const UserWidget = ({ userId, picturePath }) => {
                 headers: { Authorization: `Bearer ${token} `}
             }
         );
+        const data = await response.json();
+        setUser(data);
     };
+
+    useEffect(() => {
+        getUser();
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+    if(!user)
+        return null;
+
+    const {
+        firstName,
+        lastName,
+        location,
+        occupation,
+        viewedProfile,
+        impressions,
+        friends,
+    } = user;
+
+    return (
+        <WidgetWrapper>
+            <Box>
+                
+            </Box>
+        </WidgetWrapper>
+    )
 };
 
 export default UserWidget;
