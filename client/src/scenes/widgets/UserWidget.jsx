@@ -47,9 +47,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
     return (
         <WidgetWrapper>
-            <Box>
-                
-            </Box>
+            
         </WidgetWrapper>
     )
 };
