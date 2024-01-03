@@ -53,9 +53,47 @@ const UserWidget = ({ userId, picturePath }) => {
                 pb="1.1rem"
                 onClick={() => navigate(`/profile/${userId}`)}
             >
-                <FlexBetween>
-                    
+                <FlexBetween gap="1rem">
+                    <UserImage image={picturePath}/>
+                    <Box>
+                        <Typography
+                            variant="h4"
+                            color={dark}
+                            fontWeight="500"
+                            sx={{ 
+                                "&:hover": {
+                                    color: palette.primary.light,
+                                    cursor: "pointer"
+                                }
+                             }}
+                        >
+                            {firstName}{lastName}
+                        </Typography>
+                        {/* Friend count */}
+                        <Typography color={medium}>
+                             {friends.lenght} friends
+                        </Typography>
+                    </Box>
+                    <ManageAccountsOutlined />
                 </FlexBetween>
+
+                <Divider />
+
+                {/* Second Row */}
+                <Box p= "1rem 0">
+                    <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+                             <LocationOnOutlined fontSize="large" sx={{ color: "main" }}/>
+                             <Typography color={medium}>{location}</Typography>
+                    </Box>
+
+                    <Box display="flex" alignItems="center" gap="1rem">
+                             <WorkOutlineOutlined fontSize="large" sx={{ color: "main" }}/>
+                             <Typography color={medium}>{occupation}</Typography>
+                    </Box>  
+                </Box>
+
+                {/* Third Row */}
+                
 
             </FlexBetween>
         </WidgetWrapper>
