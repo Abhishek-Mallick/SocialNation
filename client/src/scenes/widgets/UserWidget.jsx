@@ -74,10 +74,12 @@ const UserWidget = ({ userId, picturePath }) => {
               {lastName}
             </Typography>
             {/* Friend count */}
-            <Typography color={medium}>{friends.lenght} friends</Typography>
+            <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
-          <ManageAccountsOutlined />
+          
         </FlexBetween>
+        <ManageAccountsOutlined />
+      </FlexBetween>
 
         <Divider />
 
@@ -118,7 +120,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
           <FlexBetween gap="1rem" mb="0.5rem">
             <FlexBetween gap="1rem">
-              <img src="../../assets/github-mark.png" alt="github" />
+              <img src="../../assets/twitter.png" alt="github" />
               <Box>
                 <Typography color={main} fontWeight="500">
                   Github
@@ -143,7 +145,7 @@ const UserWidget = ({ userId, picturePath }) => {
           </FlexBetween>
 
         </Box>
-      </FlexBetween>
+
     </WidgetWrapper>
   );
 };
