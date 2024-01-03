@@ -6,6 +6,7 @@ const HomePage = () => {
     return (
         <Box>
             <Navbar />
+            {/* <UserWidget userId="1" picturePath="https://picsum.photos/200" /> */}
         </Box>
     )
 }
