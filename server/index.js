@@ -17,6 +17,8 @@ import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
 import { users, posts } from "./data/index.js";
+import moment from "moment";
+import winston from "winston";
 
 /* configurations */
 // for communication in directories
@@ -34,6 +36,96 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 // setting directory where we store our assets i.e images here we are saving it locally in production enviornment we would use prefereably S3
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+
+const logs = [];
+// Middle ware for logs
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+      winston.format.timestamp({
+        format: 'DD/MM/YYYY HH:mm:ss'
+      }),
+      winston.format.colorize(),
+      winston.format.printf(info => `${info.timestamp} - ${info.level}: ${info.message}`)
+    ),
+    transports: [
+      new winston.transports.Console()
+    ]
+  });
+  
+  app.use((req, res, next) => {
+    logger.info(`${req.method} ${req.path} ${res.statusCode}`);
+    logs.push({
+      timestamp: moment().format('DD/MM/YYYY HH:mm:ss'),
+      method: req.method,
+      path: req.path,
+      status: res.statusCode
+    });
+    next();
+  });
+  
+  app.get('/logs', (req, res) => {
+    // Generate HTML table for logs
+    const htmlTable = `
+      <html>
+        <head>
+          <title>Server Logs</title>
+          <style>
+          body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+          }
+
+          h2 {
+            color: #3a5a40;
+          }
+
+          table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+          }
+
+          th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+          }
+
+          th {
+            background-color: #f2f2f2;
+          }
+
+          </style>
+        </head>
+        <body>
+          <h2>Server Logs</h2>
+          <table>
+            <tr>
+              <th>Timestamp</th>
+              <th>Method</th>
+              <th>Path</th>
+              <th>Status</th>
+            </tr>
+            ${logs.map(log => `
+              <tr>
+                <td>${log.timestamp}</td>
+                <td>${log.method}</td>
+                <td>${log.path}</td>
+                <td>${log.status}</td>
+              </tr>
+            `).join('')}
+          </table>
+        </body>
+      </html>
+    `;
+  
+    res.send(htmlTable);
+  });
+  
+  
+  
 
 // new addition
 // app.get("/", (req, res) => {
