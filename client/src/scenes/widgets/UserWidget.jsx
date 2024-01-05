@@ -120,12 +120,12 @@ const UserWidget = ({ userId, picturePath }) => {
 
           <FlexBetween gap="1rem" mb="0.5rem">
             <FlexBetween gap="1rem">
-              <img src="../../assets/twitter.png" alt="github" />
+              <img src="../../assets/github-mark.png" alt="github" height={25}/>
               <Box>
                 <Typography color={main} fontWeight="500">
                   Github
                 </Typography>
-                <Typography color={medium}>Social Network</Typography>
+                <Typography color={medium}>Dev Profile</Typography>
               </Box>
             </FlexBetween>
             <EditOutlined sx={{ color: main }} />

@@ -7,6 +7,8 @@ import WidgetWrapper from '../../components/WidgetWrapper';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '../../state';
+import UserImage from '../../components/UserImage';
+
 const MyPostWidget = ({ picturePath }) => {
     const dispatch = useDispatch();
     // to identify whether picture is clicked to be dropped or not
@@ -25,12 +27,52 @@ const MyPostWidget = ({ picturePath }) => {
         const formData = new FormData();
         formData.append("userId",_id);
         formData.append("description",post);
-        if(image)
+        if(image){
             formData.append("picture",image);
-    }
+            formData.append("picturePath",image.name);
+        }
+
+        const response = await fetch(`http://localhost:3001/posts`,
+        {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` },
+            body: formData,
+        });
+        const posts = await response.json();
+        dispatch(setPosts({ posts }));
+        // resetting all the value we have once we make a API call
+        setImage(null);
+        setPost("");
+        // once the user clicks on post button we want the updated post list to get whats new
+    };
     return (
-        <div></div>
+        <WidgetWrapper>
+            <FlexBetween gap="1.5rem">
+                <UserImage image={ picturePath } />
+                <InputBase
+                    placeholder="Share your thoughts.."
+                    onChange={(e) => setPost(e.target.value)}
+                    value={post}
+                    sx={{ 
+                        width: "100%",
+                        backgroundColor: palette.neutral.light,
+                        borderRadius: "2rem",
+                        padding: "1rem 2rem"
+                    }}
+                />
+            </FlexBetween>
+            { isImage && (
+                <Box
+                    borderRadius="5px"
+                    border={`1px solid ${medium}`}
+                    mt="1rem"
+                    p="1rem"
+                >
+
+                </Box>
+            )}
+        </WidgetWrapper>
     )
-}
+};
 
 export default MyPostWidget;

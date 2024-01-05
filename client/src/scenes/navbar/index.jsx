@@ -43,7 +43,7 @@ const Navbar = () => {
   const alt = theme.palette.background.alt;
 
 //   const fullName = `${user.firstName} ${user.lastName}`;
-    const fullName = user ? `${user.firstName} ${user.lastName}` : 'Guest';
+    const fullName = user ? `${user.firstName}` : 'Guest';
 
 
   return (
