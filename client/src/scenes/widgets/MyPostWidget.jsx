@@ -93,13 +93,46 @@ const MyPostWidget = ({ picturePath }) => {
                                     <EditOutlined />
                                 </FlexBetween>
                                 )}
-                            </Box>                            
+                            </Box>
+                            { image && (
+                                <IconButton 
+                                    onClick={() => setImage(null)}
+                                    sx={{ width: "15%" }}
+                                >
+                                    <DeleteOutlined />
+                                </IconButton>
+                            )}                          
                         </FlexBetween>
                     )}
                   </Dropzone>
 
                 </Box>
             )}
+
+            <Divider sx={{ margin: "1.25rem 0" }}/>
+            
+            <FlexBetween>
+                <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
+                        <ImageOutlined sx={{ color:mediumMain }}/>
+                        <Typography
+                            color={mediumMain}
+                            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+                        >
+                            Image
+                        </Typography>
+                </FlexBetween>
+
+                { isNonMobileScreens ? (
+                    <>
+                    <FlexBetween gap="0.25rem">
+                        <GifBoxOutlined sx={{ color: mediumMain }}/>
+
+                    </FlexBetween>
+                    </>
+                ) : (
+                    <></>
+                )}
+            </FlexBetween>
         </WidgetWrapper>
     )
 };
