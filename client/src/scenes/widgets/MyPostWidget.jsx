@@ -31,7 +31,7 @@ const MyPostWidget = ({ picturePath }) => {
             formData.append("picture",image);
             formData.append("picturePath",image.name);
         }
-
+        console.log(formData);
         const response = await fetch(`http://localhost:3001/posts`,
         {
             method: "POST",
@@ -99,7 +99,9 @@ const MyPostWidget = ({ picturePath }) => {
                                     onClick={() => setImage(null)}
                                     sx={{ width: "15%" }}
                                 >
-                                    <DeleteOutlined />
+                                    <DeleteOutlined 
+                                        sx={{ color: palette.error.main }}
+                                    />
                                 </IconButton>
                             )}                          
                         </FlexBetween>
@@ -126,12 +128,38 @@ const MyPostWidget = ({ picturePath }) => {
                     <>
                     <FlexBetween gap="0.25rem">
                         <GifBoxOutlined sx={{ color: mediumMain }}/>
-
+                        <Typography color={mediumMain}>Clip</Typography>
                     </FlexBetween>
+
+                    <FlexBetween gap="0.25rem">
+                        <AttachFileOutlined sx={{ color: mediumMain }}/>
+                        <Typography color={mediumMain}>Attach</Typography>
+                    </FlexBetween>
+
+                    <FlexBetween gap="0.25rem">
+                        <MicOutlined sx={{ color: mediumMain }}/>
+                        <Typography color={mediumMain}>Audio</Typography>
+                    </FlexBetween>
+
                     </>
                 ) : (
-                    <></>
+                    <>
+                    <FlexBetween gap="0.25rem">
+                        <MoreHorizOutlined sx={{ color: mediumMain }}/>
+                    </FlexBetween>
+                    </>
                 )}
+
+                <Button
+                    disabled={!post}
+                    onClick={ handlePost }
+                    sx={{ color: palette.background.alt,
+                        backgroundColor: palette.primary.main,
+                        borderRadius: "3rem"
+                    }}
+                >
+                    Post
+                </Button>
             </FlexBetween>
         </WidgetWrapper>
     )
