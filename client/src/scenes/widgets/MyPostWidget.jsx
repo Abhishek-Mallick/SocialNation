@@ -68,6 +68,35 @@ const MyPostWidget = ({ picturePath }) => {
                     mt="1rem"
                     p="1rem"
                 >
+                  <Dropzone
+                    acceptedFiles=".jpg,.jpeg,.png"
+                    multiple={false}
+                    onDrop={(acceptedFiles) => {
+                      setImage(acceptedFiles[0]);
+                    }}
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                        <FlexBetween>
+                            <Box
+                                {...getRootProps()}
+                                border={`2px dashed ${palette.primary.main}`}
+                                p="1rem"
+                                width="100%"
+                                sx={{ "&:hover": { cursor: "pointer" } }}
+                            >
+                                <input {...getInputProps()} />
+                                {!image ? (
+                                <p>Add Image here</p>
+                                ) : (
+                                <FlexBetween>
+                                    <Typography>{image.name}</Typography>
+                                    <EditOutlined />
+                                </FlexBetween>
+                                )}
+                            </Box>                            
+                        </FlexBetween>
+                    )}
+                  </Dropzone>
 
                 </Box>
             )}
