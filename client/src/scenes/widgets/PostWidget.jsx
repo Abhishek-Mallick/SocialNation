@@ -1,4 +1,3 @@
-import react from "react";
 import {
   ChatBubble,
   ChatBubbleOutlineOutlined,
@@ -12,7 +11,7 @@ import Friend from "../../components/Friend";
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "state";
+import { setPost } from "../../state";
 
 const PostWidget = ({
   postId,
@@ -31,12 +30,12 @@ const PostWidget = ({
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
-  const likeCount = Object.kets(likes).length;
+  const likeCount = Object.keys(likes).length;
 
   const primaryLight = palette.primary.light;
-  const primaryDark = palette.primary.dark;
+//   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
-  const medium = palette.neutral.medium;
+//   const medium = palette.neutral.medium;
 
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
