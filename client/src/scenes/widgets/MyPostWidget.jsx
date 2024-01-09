@@ -131,9 +131,14 @@ const MyPostWidget = ({ picturePath }) => {
                         <Typography color={mediumMain}>Clip</Typography>
                     </FlexBetween>
 
-                    <FlexBetween gap="0.25rem">
+                    <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
                         <AttachFileOutlined sx={{ color: mediumMain }}/>
-                        <Typography color={mediumMain}>Attach</Typography>
+                        <Typography 
+                            color={mediumMain}
+                            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+                            >
+                                Attach
+                        </Typography>
                     </FlexBetween>
 
                     <FlexBetween gap="0.25rem">

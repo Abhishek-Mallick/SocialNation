@@ -24,14 +24,14 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
-  const [isComments, setIsComments] = useState(false);
-  const { palette } = useTheme();
-  const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
-  const loggedInUserId = useSelector((state) => state.user._id);
-  const isLiked = Boolean(likes[loggedInUserId]);
-  const likeCount = Object.keys(likes).length;
+    const [isComments, setIsComments] = useState(false);
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.token);
+    const loggedInUserId = useSelector((state) => state.user._id);
+    const isLiked = Boolean(likes[loggedInUserId]);
+    const likeCount = Object.keys(likes).length;
 
+  const { palette } = useTheme();
   const primaryLight = palette.primary.light;
 //   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
