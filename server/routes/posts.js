@@ -8,7 +8,7 @@ const router = express.Router();
 // will import feeds when user is in the homepage
 // to edit later -> include a AI bot to show curated content
 router.get("/", verifyToken, getFeedPosts);
-router.get(":/userId/posts", verifyToken, getUserPosts);
+router.get("/:userId/posts", verifyToken, getUserPosts);
 
 /* UPDATE */
 router.patch("/:id/like", verifyToken, likePost);
