@@ -75,7 +75,7 @@ const PostWidget = ({
           <FlexBetween gap="0.3rem">
             <IconButton onClick={patchLike}>
               {isLiked ? (
-                <FavoriteBorderOutlined sx={{ color: primaryLight }} />
+                <FavoriteOutlined sx={{ color: "lightblue" }} />
               ) : (
                 <FavoriteBorderOutlined />
               )}
